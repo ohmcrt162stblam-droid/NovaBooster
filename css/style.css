@@ -137,3 +137,25 @@ header { text-align: center; margin-bottom: 30px; }
 .stat-mini-card { background: rgba(255,255,255,0.03); padding: 15px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); text-align: center; }
 .stat-mini-card .label { font-size: 0.7rem; color: #666; }
 .stat-mini-card .value { font-size: 1.2rem; color: var(--secondary); font-weight: bold; }
+.floating-widget {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(0, 243, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--p);
+    border-radius: 15px;
+    padding: 10px 15px;
+    z-index: 1000;
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
+    pointer-events: none; /* เพื่อไม่ให้บังการกดปุ่มข้างหลัง */
+    transition: 0.3s;
+}
+
+.f-item {
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0 0 5px var(--p);
+    margin: 2px 0;
+}
