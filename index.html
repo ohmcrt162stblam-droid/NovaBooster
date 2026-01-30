@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova Booster | Optimize Your Experience</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1 class="logo">NOVA<span>BOOST</span></h1>
+            <p class="status-text">สถานะระบบ: <span id="system-status">ดีเยี่ยม</span></p>
+        </header>
+
+        <section class="monitor-card">
+            <div class="gauge-container">
+                <div class="gauge">
+                    <div class="gauge-fill" id="ram-gauge"></div>
+                    <div class="gauge-cover"><span id="ram-percent">45</span>%</div>
+                </div>
+                <p>Memory Usage</p>
+            </div>
+            <button class="btn-boost" id="boostBtn">BOOST NOW</button>
+        </section>
+
+        <section class="app-section">
+            <h3>Quick Lite Access</h3>
+            <div class="app-grid" id="appGrid">
+                </div>
+        </section>
+    </div>
+
+    <script src="js/app-links.js"></script>
+    <script src="js/booster.js"></script>
+</body>
+</html>
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js')
+      .then(() => console.log("NovaBoost: System Ready"))
+      .catch(err => console.log("NovaBoost: Offline mode unavailable", err));
+  }
+</script>
+
+<link rel="manifest" href="manifest.json">
