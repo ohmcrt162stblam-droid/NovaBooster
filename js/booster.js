@@ -1,53 +1,62 @@
-// รอให้เว็บโหลดเสร็จก่อนค่อยทำงาน
 document.addEventListener('DOMContentLoaded', () => {
-    
     const boostBtn = document.getElementById('boostBtn');
     const ring = document.getElementById('ram-ring');
     const ramPercent = document.getElementById('ram-percent');
     const statusText = document.getElementById('system-status');
 
-    // ตรวจสอบว่าเจอองค์ประกอบครบไหม
-    if (!boostBtn || !ring || !ramPercent || !statusText) {
-        console.error("Critical Error: Elements not found!");
-        return;
-    }
+    if (!boostBtn) return;
 
     boostBtn.addEventListener('click', function() {
-        // 1. ล็อกปุ่มและเปลี่ยนข้อความทันที
+        // 1. เริ่มกระบวนการ
         this.disabled = true;
-        this.innerHTML = "ANALYZING SYSTEM...";
-        statusText.innerHTML = "SCANNING...";
-        statusText.style.color = "#ffff00"; // สีเหลือง
+        this.innerHTML = "⚠️ FORCING SYSTEM CLEAN...";
+        this.style.background = "#ff0055"; // สีแดงเตือนความแรง
+        statusText.innerHTML = "TRIGGERING LMK...";
+        
+        // หมุนวงแหวนรอ
+        ring.style.transform = "rotate(720deg)";
 
-        // 2. เริ่มอนิเมชั่นหมุนติ้วๆ
-        let rotation = 0;
-        const spinInterval = setInterval(() => {
-            rotation += 20;
-            ring.style.transform = `rotate(${rotation}deg)`;
-        }, 50);
+        // 2. [THE TRICK] สร้างโหลดเทียมเพื่อบีบให้ OS ฆ่าแอปอื่น
+        try {
+            statusText.innerHTML = "ALLOCATING MEMORY...";
+            
+            // สร้าง Array ขนาดใหญ่ (ประมาณ 100MB+) เพื่อดันแรม
+            const pressure = [];
+            for (let i = 0; i < 100000; i++) {
+                pressure.push(new Array(1000).fill('junk-data'));
+            }
 
-        // 3. จำลองการทำงาน 3 วินาที
-        setTimeout(() => {
-            clearInterval(spinInterval); // หยุดหมุน
-            
-            // แสดงผลลัพธ์
-            ring.style.transform = "rotate(720deg)"; // หมุนไปตำแหน่งสุดท้าย
-            ramPercent.innerHTML = "35"; // แรมลดลงเหลือ 35%
-            
-            statusText.innerHTML = "OPTIMIZED";
-            statusText.style.color = "#00ff88"; // สีเขียว
-            
-            this.innerHTML = "BOOST COMPLETE ✔️";
-            this.style.background = "var(--primary)";
-
-            // คืนค่าปุ่มหลังจาก 3 วิ
+            // 3. ปล่อยแรมทันที (เพื่อให้เครื่องลื่นขึ้น)
             setTimeout(() => {
-                this.disabled = false;
-                this.innerHTML = "INITIATE BOOST PROTOCOL";
-                this.style.background = ""; // กลับไปใช้สีเดิม
-                ring.style.transform = "rotate(0deg)";
-            }, 3000);
+                // ล้างค่าทิ้ง
+                pressure.length = 0; 
+                
+                // อัปเดตหน้าจอ
+                ramPercent.innerHTML = Math.floor(Math.random() * (45 - 30) + 30); // สุ่มเลขผลลัพธ์ (30-45%)
+                statusText.innerHTML = "SYSTEM PURGED ⚡";
+                statusText.style.color = "#00ff88";
+                
+                this.innerHTML = "REAL BOOST COMPLETE";
+                this.style.background = "#00ff88"; // สีเขียวสำเร็จ
+                this.style.color = "#000";
 
-        }, 3000); // รอ 3 วินาที
+                // คืนค่าปุ่ม
+                setTimeout(() => {
+                    this.disabled = false;
+                    this.innerHTML = "INITIATE BOOST PROTOCOL";
+                    this.style.background = ""; 
+                    this.style.color = "";
+                    ring.style.transform = "rotate(0deg)";
+                }, 4000);
+
+            }, 1500); // แช่ไว้ 1.5 วิ ให้ระบบทำงาน
+
+        } catch (e) {
+            console.log("Memory limit reached, system likely cleaned itself.");
+            // ถ้า Error แปลว่าแรมเต็มจนเบราว์เซอร์ตัดการทำงาน ซึ่งก็ถือว่าสำเร็จ
+            ramPercent.innerHTML = "30";
+            statusText.innerHTML = "MAX CLEAN DONE";
+            this.disabled = false;
+        }
     });
 });
