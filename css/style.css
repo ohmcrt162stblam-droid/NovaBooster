@@ -116,3 +116,24 @@ header { text-align: center; margin-bottom: 30px; }
 
 /* เผื่อที่ว่างด้านล่างสุดของ container เพื่อไม่ให้เมนูบังเนื้อหา */
 .container { padding-bottom: 80px; }
+/* การจัดการหน้า Tabs */
+.tab-content { display: none; width: 100%; animation: fadeIn 0.3s ease; }
+.tab-content.active { display: block; }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.neon-text-sm { font-size: 1.5rem; color: var(--primary); text-shadow: var(--text-glow); margin-bottom: 20px; text-align: center; }
+
+/* Stat Cards */
+.stat-card { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; border: 1px solid rgba(0, 243, 255, 0.1); margin-bottom: 15px; }
+.stat-label { font-size: 0.8rem; color: #888; letter-spacing: 1px; }
+.stat-value { font-size: 2.2rem; font-weight: bold; color: var(--primary); }
+.stat-value small { font-size: 1rem; color: #555; }
+
+.stat-bar { height: 4px; background: #111; border-radius: 2px; margin-top: 10px; overflow: hidden; }
+#fps-bar { height: 100%; background: var(--primary); box-shadow: 0 0 10px var(--primary); transition: 0.3s; }
+
+.stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.stat-mini-card { background: rgba(255,255,255,0.03); padding: 15px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); text-align: center; }
+.stat-mini-card .label { font-size: 0.7rem; color: #666; }
+.stat-mini-card .value { font-size: 1.2rem; color: var(--secondary); font-weight: bold; }
