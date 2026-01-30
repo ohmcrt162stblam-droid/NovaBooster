@@ -1,0 +1,98 @@
+:root {
+    --primary: #00f3ff;
+    --secondary: #9d00ff;
+    --bg-dark: #0a0a12;
+    --text-glow: 0 0 10px var(--primary);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Rajdhani', sans-serif;
+    background-color: var(--bg-dark);
+    color: #fff;
+    min-height: 100vh;
+    display: flex; justify-content: center; align-items: center;
+    overflow-x: hidden;
+}
+
+/* พื้นหลัง Cyberpunk */
+.bg-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle at center, #1a1a2e 0%, #000000 100%);
+    z-index: -1;
+}
+.bg-overlay::after {
+    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background-image: linear-gradient(rgba(0, 243, 255, 0.1) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(0, 243, 255, 0.1) 1px, transparent 1px);
+    background-size: 30px 30px;
+    opacity: 0.3;
+}
+
+.container {
+    width: 90%; max-width: 400px;
+    padding: 25px;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 243, 255, 0.2);
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Header & Logo */
+header { text-align: center; margin-bottom: 30px; }
+.neon-text {
+    font-size: 3rem; font-weight: 700; letter-spacing: 2px;
+    color: var(--primary);
+    text-shadow: var(--text-glow), 0 0 30px var(--primary);
+}
+.status-badge {
+    display: inline-block; background: rgba(0,0,0,0.5);
+    padding: 5px 15px; border-radius: 50px; font-size: 0.9rem;
+    border: 1px solid var(--primary); margin-top: 10px;
+}
+
+/* Gauge Section */
+.gauge-wrapper {
+    position: relative; width: 180px; height: 180px; margin: 0 auto 25px;
+    display: flex; justify-content: center; align-items: center;
+}
+.gauge-ring {
+    position: absolute; width: 100%; height: 100%;
+    border-radius: 50%;
+    border: 10px solid rgba(255,255,255,0.05);
+    border-top: 10px solid var(--secondary);
+    border-right: 10px solid var(--primary);
+    box-shadow: 0 0 20px var(--primary);
+    transition: transform 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.gauge-content { text-align: center; z-index: 2; }
+.gauge-content span { font-size: 3.5rem; font-weight: 700; text-shadow: var(--text-glow); }
+.gauge-content .unit { font-size: 1.5rem; }
+.gauge-content small { display: block; color: #aaa; letter-spacing: 1px; }
+
+/* Button */
+.cyber-button {
+    width: 100%; padding: 15px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    border: none; border-radius: 5px;
+    color: #000; font-weight: 700; font-size: 1.1rem; font-family: 'Rajdhani', sans-serif;
+    cursor: pointer; letter-spacing: 1px;
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.5);
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+    transition: 0.3s;
+}
+.cyber-button:active { transform: scale(0.98); background: var(--primary); }
+.cyber-button:disabled { background: #333; color: #777; box-shadow: none; cursor: not-allowed; }
+
+/* App Grid */
+.apps-section h3 { text-align: center; margin: 25px 0 15px; color: var(--primary); }
+.app-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.app-item {
+    background: rgba(255,255,255,0.05); padding: 15px 5px; border-radius: 10px;
+    text-align: center; font-size: 0.8rem; cursor: pointer;
+    border: 1px solid transparent; transition: 0.3s;
+}
+.app-item:hover { border-color: var(--primary); box-shadow: 0 0 10px var(--primary); }
+.app-icon { font-size: 1.5rem; margin-bottom: 5px; }
