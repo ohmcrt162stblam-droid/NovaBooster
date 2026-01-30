@@ -30,10 +30,58 @@
                 INITIATE BOOST PROTOCOL
             </button>
         </main>
+<div id="boost-page" class="tab-content active">
+    <main class="booster-section">
+        <div class="gauge-wrapper">
+            <div class="gauge-ring" id="ram-ring"></div>
+            <div class="gauge-content">
+                <span id="ram-percent">75</span><span class="unit">%</span>
+                <small>RAM LOAD</small>
+            </div>
+        </div>
+        <button id="boostBtn" class="cyber-button">INITIATE BOOST PROTOCOL</button>
+    </main>
 
-        <section class="apps-section">
-            <h3>QUICK LITE ACCESS</h3>
-            <div class="app-grid" id="appGrid"></div>
+    <section class="apps-section">
+        <h3>QUICK LITE ACCESS</h3>
+        <div class="app-grid" id="appGrid"></div>
+    </section>
+</div>
+
+<div id="monitor-page" class="tab-content">
+    <section class="monitor-container">
+        <h2 class="neon-text-sm">SYSTEM MONITOR</h2>
+        
+        <div class="stat-card">
+            <div class="stat-label">DISPLAY REFRESH RATE</div>
+            <div class="stat-value"><span id="fps-val">60</span> <small>FPS</small></div>
+            <div class="stat-bar"><div id="fps-bar" style="width: 100%"></div></div>
+        </div>
+
+        <div class="stat-grid">
+            <div class="stat-mini-card">
+                <div class="label">BATTERY</div>
+                <div class="value" id="batt-val">--%</div>
+            </div>
+            <div class="stat-mini-card">
+                <div class="label">STATUS</div>
+                <div class="value" id="batt-status">...</div>
+            </div>
+        </div>
+
+        <div class="stat-card" style="margin-top: 20px;">
+            <div class="stat-label">DEVICE LATENCY</div>
+            <div class="stat-value"><span id="ping-val">--</span> <small>MS</small></div>
+        </div>
+    </section>
+</div>
+
+<div id="games-page" class="tab-content">
+    <section class="apps-section">
+        <h2 class="neon-text-sm">GAME CENTER</h2>
+        <div class="app-grid" id="gameGrid"></div>
+    </section>
+</div>
         </section>
 
         <nav class="bottom-nav">
