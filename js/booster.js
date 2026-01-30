@@ -1,22 +1,53 @@
-document.getElementById('boostBtn').addEventListener('click', function() {
-    const btn = this;
+// รอให้เว็บโหลดเสร็จก่อนค่อยทำงาน
+document.addEventListener('DOMContentLoaded', () => {
+    
+    const boostBtn = document.getElementById('boostBtn');
     const ring = document.getElementById('ram-ring');
-    const percent = document.getElementById('ram-percent');
-    const status = document.getElementById('system-status');
+    const ramPercent = document.getElementById('ram-percent');
+    const statusText = document.getElementById('system-status');
 
-    btn.disabled = true;
-    btn.innerText = "OPTIMIZING...";
-    status.innerText = "PURGING CACHE...";
+    // ตรวจสอบว่าเจอองค์ประกอบครบไหม
+    if (!boostBtn || !ring || !ramPercent || !statusText) {
+        console.error("Critical Error: Elements not found!");
+        return;
+    }
 
-    setTimeout(() => {
-        ring.style.transform = "rotate(360deg)";
-        percent.innerText = "18"; // สมมติว่าลดลง
-        status.innerText = "SYSTEM BOOSTED!";
-        btn.innerText = "COMPLETED";
-        
+    boostBtn.addEventListener('click', function() {
+        // 1. ล็อกปุ่มและเปลี่ยนข้อความทันที
+        this.disabled = true;
+        this.innerHTML = "ANALYZING SYSTEM...";
+        statusText.innerHTML = "SCANNING...";
+        statusText.style.color = "#ffff00"; // สีเหลือง
+
+        // 2. เริ่มอนิเมชั่นหมุนติ้วๆ
+        let rotation = 0;
+        const spinInterval = setInterval(() => {
+            rotation += 20;
+            ring.style.transform = `rotate(${rotation}deg)`;
+        }, 50);
+
+        // 3. จำลองการทำงาน 3 วินาที
         setTimeout(() => {
-            btn.disabled = false;
-            btn.innerText = "EXECUTE BOOST";
-        }, 3000);
-    }, 2000);
+            clearInterval(spinInterval); // หยุดหมุน
+            
+            // แสดงผลลัพธ์
+            ring.style.transform = "rotate(720deg)"; // หมุนไปตำแหน่งสุดท้าย
+            ramPercent.innerHTML = "35"; // แรมลดลงเหลือ 35%
+            
+            statusText.innerHTML = "OPTIMIZED";
+            statusText.style.color = "#00ff88"; // สีเขียว
+            
+            this.innerHTML = "BOOST COMPLETE ✔️";
+            this.style.background = "var(--primary)";
+
+            // คืนค่าปุ่มหลังจาก 3 วิ
+            setTimeout(() => {
+                this.disabled = false;
+                this.innerHTML = "INITIATE BOOST PROTOCOL";
+                this.style.background = ""; // กลับไปใช้สีเดิม
+                ring.style.transform = "rotate(0deg)";
+            }, 3000);
+
+        }, 3000); // รอ 3 วินาที
+    });
 });
