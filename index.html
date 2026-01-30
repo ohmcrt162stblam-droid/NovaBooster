@@ -2,32 +2,37 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nova Booster | Optimize Your Experience</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>NOVA BOOST | SYSTEM OPTIMIZER</title>
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="manifest" href="manifest.json">
 </head>
 <body>
+    <div class="bg-overlay"></div>
 
     <div class="container">
         <header>
-            <h1 class="logo">NOVA<span>BOOST</span></h1>
-            <p class="status-text">สถานะระบบ: <span id="system-status">ดีเยี่ยม</span></p>
+            <h1 class="neon-text" data-text="NOVABOOST">NOVABOOST</h1>
+            <p class="status-badge">STATUS: <span id="system-status" style="color: #00ff88;">ONLINE</span></p>
         </header>
 
-        <section class="monitor-card">
-            <div class="gauge-container">
-                <div class="gauge">
-                    <div class="gauge-fill" id="ram-gauge"></div>
-                    <div class="gauge-cover"><span id="ram-percent">45</span>%</div>
+        <main class="booster-section">
+            <div class="gauge-wrapper">
+                <div class="gauge-ring" id="ram-ring"></div>
+                <div class="gauge-content">
+                    <span id="ram-percent">75</span><span class="unit">%</span>
+                    <small>RAM LOAD</small>
                 </div>
-                <p>Memory Usage</p>
             </div>
-            <button class="btn-boost" id="boostBtn">BOOST NOW</button>
-        </section>
+            
+            <button id="boostBtn" class="cyber-button">
+                INITIATE BOOST PROTOCOL
+            </button>
+        </main>
 
-        <section class="app-section">
-            <h3>Quick Lite Access</h3>
+        <section class="apps-section">
+            <h3>QUICK LITE ACCESS</h3>
             <div class="app-grid" id="appGrid">
                 </div>
         </section>
@@ -35,14 +40,11 @@
 
     <script src="js/app-links.js"></script>
     <script src="js/booster.js"></script>
+    <script>
+        // ลงทะเบียน Service Worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js').catch(() => console.log('SW Failed'));
+        }
+    </script>
 </body>
 </html>
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js')
-      .then(() => console.log("NovaBoost: System Ready"))
-      .catch(err => console.log("NovaBoost: Offline mode unavailable", err));
-  }
-</script>
-
-<link rel="manifest" href="manifest.json">
