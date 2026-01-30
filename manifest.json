@@ -1,0 +1,12 @@
+{
+  "name": "Nova Phone Booster",
+  "short_name": "NovaBoost",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#050a14",
+  "theme_color": "#00f2fe",
+  "icons": [
+    { "src": "assets/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
+
