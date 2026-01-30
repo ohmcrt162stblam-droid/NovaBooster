@@ -53,3 +53,33 @@ setInterval(() => {
         document.getElementById('ping-val').innerText = "ERR";
     });
 }, 3000);
+// อัปเดตค่าหน้าต่างลอย
+function updateFloatingWidget() {
+    const fBat = document.getElementById('f-bat');
+    const fFps = document.getElementById('f-fps');
+    const batVal = document.getElementById('bat-v').innerText;
+    const fpsVal = document.getElementById('fps-v').innerText;
+
+    if(fBat) fBat.innerText = batVal;
+    if(fFps) fFps.innerText = fpsVal;
+    
+    requestAnimationFrame(updateFloatingWidget);
+}
+updateFloatingWidget();
+
+// แถม: ฟังก์ชันทำให้หน้าต่างลอยหายไปเมื่ออยู่ที่หน้า Monitor (เพื่อไม่ให้ซ้ำซ้อน)
+function toggleWidget(tabId) {
+    const widget = document.getElementById('float-widget');
+    if (tabId === 'monitor') {
+        widget.style.opacity = '0';
+    } else {
+        widget.style.opacity = '1';
+    }
+}
+
+// แก้ฟังก์ชัน go เดิมให้เรียกใช้ toggleWidget ด้วย
+const originalGo = go;
+go = function(id, el) {
+    originalGo(id, el);
+    toggleWidget(id);
+};
