@@ -25,21 +25,7 @@
                     <small>RAM LOAD</small>
                 </div>
             </div>
-
-            <nav class="bottom-nav">
-    <div class="nav-item active" onclick="switchTab('boost')">
-        <span class="icon">🚀</span>
-        <span class="label">Boost</span>
-    </div>
-    <div class="nav-item" onclick="switchTab('monitor')">
-        <span class="icon">📊</span>
-        <span class="label">Monitor</span>
-    </div>
-    <div class="nav-item" onclick="switchTab('games')">
-        <span class="icon">🎮</span>
-        <span class="label">Games</span>
-    </div>
-</nav>
+            
             <button id="boostBtn" class="cyber-button">
                 INITIATE BOOST PROTOCOL
             </button>
@@ -47,18 +33,25 @@
 
         <section class="apps-section">
             <h3>QUICK LITE ACCESS</h3>
-            <div class="app-grid" id="appGrid">
-                </div>
+            <div class="app-grid" id="appGrid"></div>
         </section>
-    </div>
 
-    <script src="js/app-links.js"></script>
+        <nav class="bottom-nav">
+            <div class="nav-item active" onclick="switchTab('boost')">
+                <span class="icon">🚀</span>
+                <span class="label">Boost</span>
+            </div>
+            <div class="nav-item" onclick="switchTab('monitor')">
+                <span class="icon">📊</span>
+                <span class="label">Monitor</span>
+            </div>
+            <div class="nav-item" onclick="switchTab('games')">
+                <span class="icon">🎮</span>
+                <span class="label">Games</span>
+            </div>
+        </nav>
+        </div> <script src="js/app-links.js"></script>
     <script src="js/booster.js"></script>
     <script>
-        // ลงทะเบียน Service Worker
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('sw.js').catch(() => console.log('SW Failed'));
-        }
-    </script>
-</body>
-</html>
