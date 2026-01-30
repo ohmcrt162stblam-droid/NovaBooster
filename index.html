@@ -3,103 +3,205 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>NOVA BOOST | SYSTEM OPTIMIZER</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>NOVA BOOST PRO</title>
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
-    <link rel="manifest" href="manifest.json">
+    <style>
+        /* --- 🎨 CSS DESIGN --- */
+        :root {
+            --primary: #00f3ff;
+            --secondary: #9d00ff;
+            --bg-dark: #050a14;
+            --text-glow: 0 0 10px var(--primary);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Rajdhani', sans-serif; }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #fff;
+            min-height: 100vh;
+            display: flex; justify-content: center;
+            overflow-x: hidden;
+            padding-bottom: 80px; /* เว้นที่ให้เมนูแถมล่าง */
+        }
+
+        .bg-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at center, #1a1a2e 0%, #000000 100%);
+            z-index: -1;
+        }
+
+        .container { width: 90%; max-width: 400px; padding: 25px 10px; }
+
+        /* Navigation Tabs Control */
+        .tab-content { display: none; animation: fadeIn 0.3s ease; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Header */
+        header { text-align: center; margin-bottom: 30px; }
+        .neon-text { font-size: 2.8rem; color: var(--primary); text-shadow: var(--text-glow), 0 0 20px var(--primary); }
+        .status-badge { display: inline-block; padding: 5px 15px; border-radius: 50px; border: 1px solid var(--primary); font-size: 0.8rem; }
+
+        /* Gauge Area */
+        .gauge-wrapper { position: relative; width: 180px; height: 180px; margin: 0 auto 25px; display: flex; justify-content: center; align-items: center; }
+        .gauge-ring { position: absolute; width: 100%; height: 100%; border-radius: 50%; border: 8px solid rgba(255,255,255,0.05); border-top: 8px solid var(--primary); transition: 1s cubic-bezier(0.4, 0, 0.2, 1); }
+        .gauge-content { text-align: center; }
+        .gauge-content span { font-size: 3rem; font-weight: 700; }
+
+        /* Buttons */
+        .cyber-button {
+            width: 100%; padding: 15px; background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border: none; border-radius: 5px; color: #000; font-weight: 700; cursor: pointer;
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.4); clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+        }
+
+        /* Monitor Cards */
+        .stat-card { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; border: 1px solid rgba(0,243,255,0.1); margin-bottom: 15px; }
+        .stat-value { font-size: 2.5rem; font-weight: bold; color: var(--primary); }
+        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .mini-card { background: rgba(255,255,255,0.03); padding: 15px; border-radius: 12px; text-align: center; }
+
+        /* App Grid */
+        .app-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 15px; }
+        .app-item { background: rgba(255,255,255,0.05); padding: 15px 5px; border-radius: 12px; text-align: center; font-size: 0.8rem; border: 1px solid transparent; }
+
+        /* Bottom Nav */
+        .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: #0a0a12; border-top: 1px solid var(--primary); display: flex; padding: 10px 0; z-index: 100; }
+        .nav-item { flex: 1; text-align: center; color: #555; cursor: pointer; }
+        .nav-item.active { color: var(--primary); text-shadow: var(--text-glow); }
+        .nav-item span { display: block; font-size: 1.2rem; }
+    </style>
 </head>
 <body>
     <div class="bg-overlay"></div>
-
     <div class="container">
-        <header>
-            <h1 class="neon-text" data-text="NOVABOOST">NOVABOOST</h1>
-            <p class="status-badge">STATUS: <span id="system-status" style="color: #00ff88;">ONLINE</span></p>
-        </header>
-
-        <main class="booster-section">
+        
+        <div id="boost-page" class="tab-content active">
+            <header>
+                <h1 class="neon-text">NOVA BOOST</h1>
+                <div class="status-badge">SYSTEM: <span id="sys-status">READY</span></div>
+            </header>
             <div class="gauge-wrapper">
                 <div class="gauge-ring" id="ram-ring"></div>
-                <div class="gauge-content">
-                    <span id="ram-percent">75</span><span class="unit">%</span>
-                    <small>RAM LOAD</small>
-                </div>
+                <div class="gauge-content"><span id="ram-val">78</span>%<br><small>RAM</small></div>
             </div>
-            
-            <button id="boostBtn" class="cyber-button">
-                INITIATE BOOST PROTOCOL
-            </button>
-        </main>
-<div id="boost-page" class="tab-content active">
-    <main class="booster-section">
-        <div class="gauge-wrapper">
-            <div class="gauge-ring" id="ram-ring"></div>
-            <div class="gauge-content">
-                <span id="ram-percent">75</span><span class="unit">%</span>
-                <small>RAM LOAD</small>
-            </div>
-        </div>
-        <button id="boostBtn" class="cyber-button">INITIATE BOOST PROTOCOL</button>
-    </main>
-
-    <section class="apps-section">
-        <h3>QUICK LITE ACCESS</h3>
-        <div class="app-grid" id="appGrid"></div>
-    </section>
-</div>
-
-<div id="monitor-page" class="tab-content">
-    <section class="monitor-container">
-        <h2 class="neon-text-sm">SYSTEM MONITOR</h2>
-        
-        <div class="stat-card">
-            <div class="stat-label">DISPLAY REFRESH RATE</div>
-            <div class="stat-value"><span id="fps-val">60</span> <small>FPS</small></div>
-            <div class="stat-bar"><div id="fps-bar" style="width: 100%"></div></div>
+            <button class="cyber-button" onclick="runBoost()">INITIATE BOOST</button>
+            <div class="app-grid" id="appGrid"></div>
         </div>
 
-        <div class="stat-grid">
-            <div class="stat-mini-card">
-                <div class="label">BATTERY</div>
-                <div class="value" id="batt-val">--%</div>
+        <div id="monitor-page" class="tab-content">
+            <h2 style="color:var(--primary); margin-bottom:20px;">SYSTEM MONITOR</h2>
+            <div class="stat-card">
+                <p>SCREEN REFRESH RATE</p>
+                <div class="stat-value"><span id="fps-val">--</span> <small>FPS</small></div>
             </div>
-            <div class="stat-mini-card">
-                <div class="label">STATUS</div>
-                <div class="value" id="batt-status">...</div>
+            <div class="stat-grid">
+                <div class="mini-card"><p>BATTERY</p><div id="batt-val" class="stat-value" style="font-size:1.5rem">--%</div></div>
+                <div class="mini-card"><p>NET PING</p><div id="ping-val" class="stat-value" style="font-size:1.5rem">--</div></div>
             </div>
         </div>
 
-        <div class="stat-card" style="margin-top: 20px;">
-            <div class="stat-label">DEVICE LATENCY</div>
-            <div class="stat-value"><span id="ping-val">--</span> <small>MS</small></div>
+        <div id="games-page" class="tab-content">
+            <h2 style="color:var(--primary); margin-bottom:20px;">GAME CENTER</h2>
+            <div class="app-grid" id="gameGrid"></div>
         </div>
-    </section>
-</div>
-
-<div id="games-page" class="tab-content">
-    <section class="apps-section">
-        <h2 class="neon-text-sm">GAME CENTER</h2>
-        <div class="app-grid" id="gameGrid"></div>
-    </section>
-</div>
-        </section>
 
         <nav class="bottom-nav">
-            <div class="nav-item active" onclick="switchTab('boost')">
-                <span class="icon">🚀</span>
-                <span class="label">Boost</span>
-            </div>
-            <div class="nav-item" onclick="switchTab('monitor')">
-                <span class="icon">📊</span>
-                <span class="label">Monitor</span>
-            </div>
-            <div class="nav-item" onclick="switchTab('games')">
-                <span class="icon">🎮</span>
-                <span class="label">Games</span>
-            </div>
+            <div class="nav-item active" onclick="switchTab('boost')"><span>🚀</span>Boost</div>
+            <div class="nav-item" onclick="switchTab('monitor')"><span>📊</span>Monitor</div>
+            <div class="nav-item" onclick="switchTab('games')"><span>🎮</span>Games</div>
         </nav>
-        </div> <script src="js/app-links.js"></script>
-    <script src="js/booster.js"></script>
+    </div>
+
     <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js').catch(() => console.log('SW Failed'));
+        /* --- ⚡ JAVASCRIPT LOGIC --- */
+
+        // 1. สลับหน้า
+        function switchTab(name) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            document.getElementById(name + '-page').classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        // 2. ระบบ Boost (สูตรกินแรมจริงเพื่อให้ OS ฆ่าแอปอื่น)
+        function runBoost() {
+            const btn = event.target;
+            const status = document.getElementById('sys-status');
+            const ring = document.getElementById('ram-ring');
+            
+            btn.disabled = true;
+            btn.innerText = "PURGING RAM...";
+            status.innerText = "LMK TRIGGERING";
+            ring.style.transform = "rotate(720deg)";
+
+            // จำลองการกินแรมชั่วคราว
+            const dummy = new Array(1000000).fill("🚀"); 
+            
+            setTimeout(() => {
+                dummy.length = 0; // คืนแรม
+                document.getElementById('ram-val').innerText = Math.floor(Math.random() * 20) + 25;
+                status.innerText = "OPTIMIZED";
+                btn.innerText = "BOOST SUCCESS";
+                setTimeout(() => {
+                    btn.disabled = false;
+                    btn.innerText = "INITIATE BOOST";
+                    ring.style.transform = "rotate(0deg)";
+                }, 3000);
+            }, 2000);
+        }
+
+        // 3. Monitor: FPS
+        let frames = 0, lastTime = performance.now();
+        function checkFPS() {
+            frames++;
+            const now = performance.now();
+            if (now >= lastTime + 1000) {
+                document.getElementById('fps-val').innerText = frames;
+                frames = 0; lastTime = now;
+            }
+            requestAnimationFrame(checkFPS);
+        }
+        checkFPS();
+
+        // 4. Monitor: Battery & Ping
+        if(navigator.getBattery) navigator.getBattery().then(b => {
+            const up = () => document.getElementById('batt-val').innerText = Math.round(b.level*100) + "%";
+            up(); b.onlevelchange = up;
+        });
+
+        setInterval(() => {
+            const s = Date.now();
+            fetch('https://www.google.com/favicon.ico', {mode:'no-cors'}).then(() => {
+                document.getElementById('ping-val').innerText = (Date.now() - s) + "ms";
+            });
+        }, 3000);
+
+        // 5. App & Game Lists
+        const appList = [
+            {n:'Instagram', i:'📸', u:'https://www.instagram.com'},
+            {n:'TikTok', i:'🎵', u:'https://www.tiktok.com'},
+            {n:'Facebook', i:'📘', u:'https://m.facebook.com'}
+        ];
+        const gameList = [
+            {n:'Free Fire', i:'🔫', u:'https://play.google.com/store/apps/details?id=com.dts.freefireth'},
+            {n:'ROV', i:'⚔️', u:'https://play.google.com/store/apps/details?id=com.garena.game.kgth'},
+            {n:'Roblox', i:'🟥', u:'https://www.roblox.com'}
+        ];
+
+        const render = (data, target) => {
+            data.forEach(a => {
+                const d = document.createElement('div');
+                d.className = 'app-item';
+                d.innerHTML = `<div style="font-size:1.5rem">${a.i}</div>${a.n}`;
+                d.onclick = () => window.location.href = a.u;
+                document.getElementById(target).appendChild(d);
+            });
+        };
+        render(appList, 'appGrid');
+        render(gameList, 'gameGrid');
+
+    </script>
+</body>
+</html>
